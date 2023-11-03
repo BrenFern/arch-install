@@ -12,17 +12,27 @@
 7. Montar as partições. mount /dev/sda /mnt
 8. Alterar o mirror. vim /etc/pacman.d/mirrorlist 
 ## Instalação
-9. Baixar o kernel e o firmware base do Arch Linux. pacstrap -K /mnt base linux linux-firmware
+9. Baixar o kernel e o firmware base do Arch Linux. pacstrap -K /mnt base linux linux-firmware vim dhcpcd
 10. Gerar o fstab. genfstab -U /mnt >> /mnt/etc/fstab
 11. Fazer o chroot para o diretório /mnt. arch-chroot /mnt
 12. Alterar o fuso horário do Arch Linux. ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime hwclock --systohc
 13. Alterar a localização do Arch Linux. vim /etc/locale.gen (descomentar linha PTBR-UTF8) e dps export LANG=pt_BR.UTF-
-14. Fixar o layout do Arch Linux. KEYMAP=br-abnt2
+14. locale-gen
+15. echo KEYMAP=br-abnt2 >> /etc/vconsole.conf
+16. Fixar o layout do Arch Linux. KEYMAP=br-abnt2
 
 ## Pós-instalação
 15. Configurar o hostname da rede.
 16. Configurar o IP local no arquivo /etc/hosts.
 17. Criar senha para o usuário root ou criar outros usuários.
+
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
+sudo systemctl enable dhcpcd
+pacman -S  os-prober mtools network-manager network-manager-applet networkmanager wpa_supplicant wireless_tools dialog
+useradd -m -g users -G wheel,storage,power -s /bin/bash nomedousuario
+
 
 Links úteis:
 - [Fórum do Arch Linux - Configuração do Layout ABNT2](https://bbs.archlinux.org/viewtopic.php?id=225407)
