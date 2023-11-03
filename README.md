@@ -25,14 +25,25 @@
 15. Configurar o hostname da rede.
 16. Configurar o IP local no arquivo /etc/hosts.
 17. Criar senha para o usuário root ou criar outros usuários.
+18. pacman -S grub efibootmgr
+19. grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck
+20. grub-mkconfig -o /boot/grub/grub.cfg
+21. systemctl enable dhcpcd
+22. pacman -S  os-prober mtools network-manager network-manager-applet networkmanager wpa_supplicant wireless_tools dialog
+23. useradd -m -g users -G wheel,storage,power -s /bin/bash nomedousuario
+24. sudo usermod -aG sudo SEU_USUÁRIO ou  SEU_USUÁRIO ALL=(ALL:ALL) ALL no /etc/sudoers
+25. COISAS IMPORTANTES A CONSIDERAR:
+26. NO LINUX TUDO É UM ARQUIVO, INCLUSIVE UMA CONFIGURAÇÃO, ESSE ARQUIVO PODE SER ALTERADO DE MANEIRA AUTOMATIZADA ATRAVÉS DE UM COMANDO SEJA UM ECHO (QUE ACABA SENDO UAM EDIÇÃO MANUAL) OU UM COMANDO PROPRIO DO UTILITARIO/FERRAMENTA (QUE FAZ ESSA EDIÇÃO MANUAL PRA
+27. VOCÊ) OU ATRAVÉS DA EDIÇÃO MANUAL DO ARQUIVO. EXEMPLO: sudo usermod -aG sudo SEU_USUÁRIO OU COM UM VIM /ETC/SUDOERS
+28. hostnamectl set-hostname nomedoseuhost OU VIM /ETC/HOSTNAME
+29. ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime OU timedatectl set-timezone America/Sao_Paulo
 
-pacman -S grub efibootmgr
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck
-grub-mkconfig -o /boot/grub/grub.cfg
-sudo systemctl enable dhcpcd
-pacman -S  os-prober mtools network-manager network-manager-applet networkmanager wpa_supplicant wireless_tools dialog
-useradd -m -g users -G wheel,storage,power -s /bin/bash nomedousuario
 
+
+Links úteis:
+- [Fórum do Arch Linux - Configuração do Layout ABNT2](https://bbs.archlinux.org/viewtopic.php?id=225407)
+- [Vídeo Tutorial no YouTube - Instalação do Arch Linux](https://youtu.be/4orYC5ARfn8?si=InYiFS8E6tPLKyfn)
+- [Guia de Instalação do Arch Linux (em Português)](https://wiki.archlinux.org/title/Installation_guide_(Portugu%C3%AAs)#Chroot)
 
 Links úteis:
 - [Fórum do Arch Linux - Configuração do Layout ABNT2](https://bbs.archlinux.org/viewtopic.php?id=225407)
